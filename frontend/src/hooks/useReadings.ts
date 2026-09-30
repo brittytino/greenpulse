@@ -11,7 +11,6 @@ export function useReadings() {
   const [lastSynchronized, setLastSynchronized] = useState<Date | null>(null);
   const [autoRefreshInterval, setAutoRefreshInterval] = useState<number>(20); // in seconds, 0 = paused
   const [isSimulating, setIsSimulating] = useState<boolean>(false);
-  const [isUsingLocalMock, setIsUsingLocalMock] = useState<boolean>(false);
 
   const simulationTimerRef = useRef<number | null>(null);
 
@@ -28,7 +27,6 @@ export function useReadings() {
       const data = await readingsService.getReadings();
       setReadings(data);
       setLastSynchronized(new Date());
-      setIsUsingLocalMock(readingsService.isUsingLocalStore());
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'Failed to retrieve sensor readings.';
       setErrorMessage(msg);
@@ -186,7 +184,6 @@ export function useReadings() {
     setAutoRefreshInterval,
     isSimulating,
     setIsSimulating,
-    isUsingLocalMock,
     refetch: () => fetchReadings(false),
     refreshSilently: () => fetchReadings(true),
     createReading,

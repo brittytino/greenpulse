@@ -13,7 +13,7 @@ import { Header } from '../components/Header';
 import { DashboardLayout } from '../layouts/DashboardLayout';
 import { ToastContainer } from '../components/ToastContainer';
 import { SensorReading, CreateReadingDTO, UpdateReadingDTO } from '../types';
-import { AlertCircle, RefreshCw, Sprout, Database } from 'lucide-react';
+import { AlertCircle, RefreshCw, Sprout } from 'lucide-react';
 import { Button } from '../components/UI/Button';
 
 export const DashboardPage: React.FC = () => {
@@ -27,7 +27,6 @@ export const DashboardPage: React.FC = () => {
     lastSynchronized,
     isSimulating,
     setIsSimulating,
-    isUsingLocalMock,
     refetch,
     refreshSilently,
     createReading,
@@ -108,26 +107,9 @@ export const DashboardPage: React.FC = () => {
           lastSynchronized={lastSynchronized}
           isSimulating={isSimulating}
           onToggleSimulation={() => setIsSimulating(!isSimulating)}
-          isUsingLocalMock={isUsingLocalMock}
         />
       }
     >
-      {/* Informational banner if using local offline storage fallback */}
-      {isUsingLocalMock && (
-        <div className="bg-emerald-50 border border-emerald-200/80 rounded-xl p-3.5 flex items-center justify-between text-xs text-emerald-900 shadow-xs">
-          <div className="flex items-center gap-2.5">
-            <Database className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-            <div>
-              <span className="font-semibold">Local Storage Mode Active:</span> Frontend is operating autonomously with local storage persistence and mock data. To connect to the local API Gateway runner, run{' '}
-              <code className="bg-emerald-100/80 px-1 py-0.5 rounded font-mono text-emerald-800">
-                npm run dev:backend
-              </code>{' '}
-              on port 3000.
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Primary UI State Switcher */}
       {isLoading ? (
         <div className="py-24 flex flex-col items-center justify-center space-y-4">

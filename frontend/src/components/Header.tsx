@@ -10,7 +10,6 @@ interface HeaderProps {
   lastSynchronized: Date | null;
   isSimulating: boolean;
   onToggleSimulation: () => void;
-  isUsingLocalMock: boolean;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -20,7 +19,6 @@ export const Header: React.FC<HeaderProps> = ({
   lastSynchronized,
   isSimulating,
   onToggleSimulation,
-  isUsingLocalMock,
 }) => {
   const [currentDateTime, setCurrentDateTime] = useState<string>('');
 
@@ -71,7 +69,7 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="flex flex-wrap items-center gap-3 sm:gap-4 justify-between md:justify-end">
             {/* System Status & Current Time */}
             <div className="flex items-center gap-3 text-xs text-slate-600 border-r border-slate-200 pr-3 sm:pr-4">
-              <div className="flex items-center gap-1.5" title={isUsingLocalMock ? 'Running on Client Storage Fallback' : 'Connected to API'}>
+              <div className="flex items-center gap-1.5" title="Connected to AWS API Gateway (DynamoDB)">
                 <span className="relative flex h-2.5 w-2.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
